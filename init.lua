@@ -752,7 +752,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -762,13 +762,23 @@ require('lazy').setup({
           return nil
         else
           return {
-            timeout_ms = 500,
+            -- odin requires more
+            timeout_ms = 1000,
             lsp_format = 'fallback',
           }
         end
       end,
+      formatters = {
+        odinfmt = {
+          -- Change where to find the command if it isn't in your path.
+          command = 'odinfmt',
+          args = { '-stdin' },
+          stdin = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        _odin = { 'odinfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -978,7 +988,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
