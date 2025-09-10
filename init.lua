@@ -413,7 +413,15 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          colorscheme = {
+            enable_preview = true,
+            layout_config = {
+              width = 0.8,
+              height = 0.8,
+            },
+          },
+        },
         defaults = {
           mappings = {
             i = {
@@ -781,16 +789,16 @@ require('lazy').setup({
         end
       end,
       formatters = {
-        odinfmt = {
-          -- Change where to find the command if it isn't in your path.
-          command = 'odinfmt',
-          args = { '-stdin' },
-          stdin = true,
-        },
+        -- odinfmt = {
+        --   -- Change where to find the command if it isn't in your path.
+        --   command = 'odinfmt',
+        --   args = { '-stdin' },
+        --   stdin = true,
+        -- },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        _odin = { 'odinfmt' },
+        -- _odin = { 'odinfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -987,32 +995,32 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
   -- buffer remove
-  {
-    'echasnovski/mini.bufremove',
-
-    keys = {
-      {
-        '<leader>bd',
-        function()
-          local bd = require('mini.bufremove').delete
-          if vim.bo.modified then
-            local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')
-            if choice == 1 then -- Yes
-              vim.cmd.write()
-              bd(0)
-            elseif choice == 2 then -- No
-              bd(0, true)
-            end
-          else
-            bd(0)
-          end
-        end,
-        desc = 'Delete Buffer',
-      },
-      -- stylua: ignore
-      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-    },
-  },
+  -- {
+  --   'echasnovski/mini.bufremove',
+  --
+  --   keys = {
+  --     {
+  --       '<leader>bd',
+  --       function()
+  --         local bd = require('mini.bufremove').delete
+  --         if vim.bo.modified then
+  --           local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')
+  --           if choice == 1 then -- Yes
+  --             vim.cmd.write()
+  --             bd(0)
+  --           elseif choice == 2 then -- No
+  --             bd(0, true)
+  --           end
+  --         else
+  --           bd(0)
+  --         end
+  --       end,
+  --       desc = 'Delete Buffer',
+  --     },
+  --     -- stylua: ignore
+  --     { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+  --   },
+  -- },
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
