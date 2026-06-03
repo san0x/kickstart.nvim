@@ -111,6 +111,7 @@ do
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
   vim.o.relativenumber = true
+  vim.o.wrap = false
 
   -- Enable mouse mode, can be useful for resizing splits for example!
   vim.o.mouse = 'a'
@@ -498,7 +499,7 @@ do
     pickers = {
       colorscheme = {
         enable_preview = true,
-    }
+      },
     },
     extensions = {
       ['ui-select'] = { require('telescope.themes').get_dropdown() },
@@ -800,6 +801,7 @@ do
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
+      -- zig = { 'zig fmt' },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
